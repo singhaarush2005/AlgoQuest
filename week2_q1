@@ -1,0 +1,23 @@
+int longestSubarrayWithSumK(vector<int> a, long long k) {
+    unordered_map<long long, int> prefixSumIndex;
+    long long sum = 0;
+    int maxLen = 0;
+
+    for (int i = 0; i < a.size(); i++) {
+        sum += a[i];
+
+        if (sum == k)
+            maxLen = i + 1;
+
+        if (prefixSumIndex.find(sum - k) != prefixSumIndex.end()) {
+            maxLen = max(maxLen, i - prefixSumIndex[sum - k]);
+        }
+
+        
+        if (prefixSumIndex.find(sum) == prefixSumIndex.end()) {
+            prefixSumIndex[sum] = i;
+        }
+    }
+
+    return maxLen;
+}
