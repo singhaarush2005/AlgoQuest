@@ -1,0 +1,34 @@
+class Solution {
+public:
+    vector<int> findAnagrams(string s, string p) {
+        unordered_map<char, int> hashmap_p;
+        unordered_map<char, int> hashmap_s;
+        vector<int> ans;
+
+        if (p.size() > s.size()) {
+            return ans;
+        }
+
+        for (int i = 0; i < p.size(); i++) {
+            hashmap_p[p[i]]++;
+            hashmap_s[s[i]]++;
+        }
+
+        if (hashmap_p == hashmap_s) {
+            ans.push_back(0);
+        }
+
+        for (int i = p.size(); i < s.size(); i++) {
+            hashmap_s[s[i]]++;
+            hashmap_s[s[i - p.size()]]--;
+            if (hashmap_s[s[i - p.size()]] == 0) {
+                hashmap_s.erase(s[i - p.size()]);
+            }
+            // read the note for a chatgpt link to an error i was making
+            if (hashmap_p == hashmap_s) {
+                ans.push_back(i - p.size() + 1);
+            }
+        }
+        return ans;
+    }
+};
