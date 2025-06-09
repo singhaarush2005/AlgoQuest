@@ -12,5 +12,5 @@ int Solution::solve(vector<int> &A, int B) {
         }
         count+=i-right+1;
     }
-    returna count;
+    return count;
 }
