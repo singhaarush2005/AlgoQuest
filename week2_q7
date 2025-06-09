@@ -1,0 +1,16 @@
+int Solution::solve(vector<int> &A, int B) {
+    int n=A.size();
+    int count=0,sum=0,right=0;
+
+    for(int i=0;i<n;i++)
+    {
+        sum+=A[i];
+        while(sum>=B)
+        {
+            sum-=A[right];
+            right++;
+        }
+        count+=i-right+1;
+    }
+    returna count;
+}
