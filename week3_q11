@@ -1,0 +1,16 @@
+void subset(int index,vector<vector<int>> &ans,vector<int> &ds ,vector<int> &A){
+    ans.push_back(ds);
+    for(int i = index;i<A.size();i++){
+         if (i > index && A[i] == A[i - 1]) continue; // Skip duplicates
+        ds.push_back(A[i]);
+         subset(i+1,ans,ds,A);
+         ds.pop_back();
+    }
+}
+vector<vector<int> > Solution::subsetsWithDup(vector<int> &A) {
+    sort(A.begin(),A.end());
+    vector<vector<int>> ans;
+    vector<int> ds;
+    subset(0,ans,ds,A);
+    return ans;
+}
